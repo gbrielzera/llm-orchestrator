@@ -14,7 +14,7 @@ dependencies = [
     "python-dotenv>=1.0.1",
     "rich>=13.7.1"
 ]
-# Observação: se desejar usar Typer para CLI ainda mais amigável, adicione: "typer>=0.12.3"
+# Observação: Typer para CLI ainda mais amigável, adicione: "typer>=0.12.3"
 
 [project.scripts]
 llm-orchestrator = "app.cli:main"
