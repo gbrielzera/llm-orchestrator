@@ -7,7 +7,7 @@ name = "llm-orchestrator"
 version = "0.1.0"
 description = "CLI que integra ChatGPT e outro LLM com padrões de projeto (Factory, Command, Strategy, Observer)."
 readme = "README.md"
-authors = [{name="Seu Nome", email="seuemail@example.com"}]
+authors = [{name="Gabriel Cézar Peres Matos", email="cezaaar57@gmail.com"}]
 requires-python = ">=3.10"
 dependencies = [
     "requests>=2.31.0",
