@@ -7,7 +7,7 @@ class MockClient(LLMClient):
         self.name = name
 
     def generate(self, prompt: str, **params: Any) -> str:
-        # Respostas simples previsíveis para demonstração
+        # respostas simples previsíveis para demonstração
         if "entropia" in prompt.lower():
             if self.name.startswith("chat"):
                 return "Entropia mede a dispersão de energia e o número de microestados possíveis; em termos simples, é um jeito de quantificar a desordem."

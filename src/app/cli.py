@@ -1,5 +1,3 @@
-# Em: API/src/app/cli.py
-
 from __future__ import annotations
 import argparse
 import logging
@@ -13,16 +11,12 @@ from .utils.logging_setup import setup_logging
 from .patterns.factory import LLMClientFactory
 from .patterns.command import QueryCommand
 from .patterns.strategy import CombinedStrategy, LengthStrategy, KeywordStrategy, EvaluationStrategy
-# AJUSTE 1: Re-importar as classes do Observer
 from .patterns.observer import ResultSubject, Observer, SelectionEvent
-# AJUSTE 2: Importar o ResponseEvaluator
 from .evaluation.selector import ResponseEvaluator
 
 console = Console()
 
-# AJUSTE 3: Restaurar a classe ConsoleObserver
 class ConsoleObserver(Observer):
-    """Um observer que imprime os resultados no console."""
     def update(self, event: SelectionEvent) -> None:
         console.print("\n--- [ Análise da Seleção ] ---")
         table = Table(title="Pontuações por modelo", show_lines=True)
@@ -39,7 +33,6 @@ class ConsoleObserver(Observer):
 
 
 def build_strategy(args: argparse.Namespace) -> EvaluationStrategy:
-    # (Esta função não muda)
     if args.strategy == "length":
         return LengthStrategy(target_len=args.target_len)
     elif args.strategy == "keyword":
@@ -54,7 +47,6 @@ def run(question: str, models: List[str], strategy: EvaluationStrategy, debug: b
 
     clients = LLMClientFactory.create_all(models)
 
-    # AJUSTE 4: Criar o Subject e o Observer
     subject = ResultSubject()
     observer = ConsoleObserver()
     subject.attach(observer)
@@ -68,13 +60,9 @@ def run(question: str, models: List[str], strategy: EvaluationStrategy, debug: b
             text = f"[ERRO] {type(e).__name__}: {e}"
         responses[name] = text
 
-    # AJUSTE 5: Criar o avaliador e passar o 'subject' para ele
     evaluator = ResponseEvaluator(strategy=strategy, subject=subject)
-    # A chamada ao método 'choose' irá NOTIFICAR o ConsoleObserver, que imprimirá a análise
     result = evaluator.choose(question, responses)
 
-    # AJUSTE 6: A apresentação da análise agora é automática (via observer).
-    # O final do script apenas apresenta as respostas e o vencedor.
     console.print("--- [ Respostas Completas ] ---")
     for model, text in responses.items():
         border_style = "cyan" if model == result.winner_model else "blue"
@@ -82,7 +70,6 @@ def run(question: str, models: List[str], strategy: EvaluationStrategy, debug: b
     
     console.print(Panel.fit(f"Vencedor: [bold]{result.winner_model}[/bold]", title="Resultado Final", border_style="magenta"))
 
-# A função main() não precisa de alterações
 def main() -> None:
     parser = argparse.ArgumentParser(description="CLI que compara ChatGPT e outro LLM usando padrões de projeto.")
     parser.add_argument("question", type=str, help="Pergunta a ser enviada aos modelos.")

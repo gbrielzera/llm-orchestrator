@@ -31,15 +31,12 @@ class GeminiClient(LLMClient):
 
         resp = requests.post(url, headers=headers, json=payload, timeout=SETTINGS.timeout_s)
 
-        # Lança um erro para respostas ruins (4xx ou 5xx)
         resp.raise_for_status() 
 
         data = resp.json()
 
         try:
-            # O caminho para o texto gerado na API do Gemini
             return data["candidates"][0]["content"]["parts"][0]["text"].strip()
         except (KeyError, IndexError) as e:
-            # Adiciona um print para ajudar a depurar respostas inesperadas
             print("Resposta inesperada da API Gemini:", json.dumps(data, indent=2))
             raise RuntimeError(f"Falha ao ler resposta do Gemini: {e}")
