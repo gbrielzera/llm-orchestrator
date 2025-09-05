@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools>=67", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "llm-orchestrator"
+version = "0.1.0"
+description = "CLI que integra ChatGPT e outro LLM com padrões de projeto (Factory, Command, Strategy, Observer)."
+readme = "README.md"
+authors = [{name="Seu Nome", email="seuemail@example.com"}]
+requires-python = ">=3.10"
+dependencies = [
+    "requests>=2.31.0",
+    "python-dotenv>=1.0.1",
+    "rich>=13.7.1"
+]
+# Observação: se desejar usar Typer para CLI ainda mais amigável, adicione: "typer>=0.12.3"
+
+[project.scripts]
+llm-orchestrator = "app.cli:main"
