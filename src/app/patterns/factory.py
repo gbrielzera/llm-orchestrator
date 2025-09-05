@@ -5,7 +5,6 @@ from typing import Dict, Type
 from ..config import SETTINGS
 from ..llm.base import LLMClient
 from ..llm.openai_client import OpenAIClient
-from ..llm.hf_client import HFClient
 from ..llm.mock_client import MockClient
 # IMPORTAR O NOVO CLIENTE
 from ..llm.gemini_client import GeminiClient
