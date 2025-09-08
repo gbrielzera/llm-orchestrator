@@ -4,6 +4,8 @@ Esta aplicação CLI integra o **ChatGPT** (via API da OpenAI) e o **Gemini** (v
 
 O projeto foi construído utilizando os seguintes padrões de projeto: **Factory**, **Command**, **Strategy** e **Observer**, para garantir uma arquitetura flexível, robusta e de fácil manutenção.
 
+Link de apresentação do projeto: https://www.youtube.com/watch?v=G1c9WrypwPM
+
 ## **Requisitos**
 
 * Python 3.10+  
